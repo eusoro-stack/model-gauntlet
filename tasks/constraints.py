@@ -7,6 +7,9 @@ Do not mention quartz. Output only the 5 bullets, nothing else."""
 
 OPTIONS = {"temperature": 0.7, "num_predict": 512, "seed": 42}
 
+CHECKS = ["exactly 5 bullets", "nothing but bullets", "third bullet is 4 words",
+          "never says quartz", "on topic"]
+
 def grade(resp, extract_code):
     out = []
     lines = [l.strip() for l in resp.strip().splitlines() if l.strip()]

@@ -14,13 +14,16 @@ Requirements:
 
 OPTIONS = {"temperature": 0.3, "num_predict": 8192, "seed": 42}
 
+CHECKS = ["function named plan", "valid order", "alphabetical tiebreak",
+          "cycle raises exact msg", "unknown dep ignored", "real PM2 stack"]
+
 def grade(resp, extract_code):
     out = []
     ns = {}
     try:
         exec(extract_code(resp), ns)
     except Exception as e:
-        return [("code executes", False, repr(e))]
+        return [("function named plan", False, f"code did not execute: {e!r}")]
     plan = ns.get("plan")
     out.append(("function named plan", bool(plan), "found" if plan else
                 [k for k, v in ns.items() if callable(v) and not k.startswith("__")]))

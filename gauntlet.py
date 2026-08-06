@@ -31,6 +31,14 @@ def ask(model, prompt, options):
 def extract_code(text):
     blocks = re.findall(r"```(?:python)?\s*\n(.*?)```", text, re.S)
     return "\n\n".join(blocks) if blocks else text
+def pad(results, mod):
+    """Ensure every declared check is scored. A grader that bails early must not
+    shrink its own denominator — unreached checks count as failures."""
+    checks = getattr(mod, "CHECKS", None)
+    if not checks: return results
+    seen = {name for name, _, _ in results}
+    return results + [(c, False, "not reached") for c in checks if c not in seen]
+
 def load_tasks(only=None):
     tasks = []
     for path in sorted(glob.glob(os.path.join(ROOT, "tasks", "*.py"))):
@@ -55,7 +63,7 @@ def run(model, only=None, runs=1):
             opts = dict(base_opts)
             opts["seed"] = opts.get("seed", 42) + i        # deterministic, but varied across runs
             resp, perf = ask(model, mod.PROMPT, opts)
-            results = mod.grade(resp, extract_code)
+            results = pad(mod.grade(resp, extract_code), mod)
             p = sum(1 for _, ok, _ in results if ok)
             if runs > 1: print(f"  run {i+1}: {p}/{len(results)} · seed {opts['seed']} · {perf['tok_s']} tok/s")
             with open(RESULTS, "a") as f:

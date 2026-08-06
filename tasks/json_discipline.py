@@ -7,6 +7,9 @@ moondream for a Telegram bot that must read screenshots and write Python."""
 
 OPTIONS = {"temperature": 0.2, "num_predict": 1024, "seed": 42}
 
+CHECKS = ["no markdown fences", "parses as JSON", "exactly 3 objects", "exact keys",
+          "moondream flagged for vision"]
+
 def grade(resp, extract_code):
     out = []
     txt = resp.strip()
