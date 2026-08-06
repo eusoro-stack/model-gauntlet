@@ -1,0 +1,9 @@
+{"ts": "2026-07-21 09:23", "model": "hermes3:8b", "task": "constraints", "pass": 3, "of": 5, "tokens": 22, "tok_s": 100.3, "secs": 9.4}
+{"ts": "2026-07-21 09:23", "model": "hermes3:8b", "task": "json_discipline", "pass": 5, "of": 5, "tokens": 135, "tok_s": 117.4, "secs": 1.7}
+{"ts": "2026-07-21 09:23", "model": "hermes3:8b", "task": "orchestrator", "pass": 4, "of": 6, "tokens": 180, "tok_s": 119.4, "secs": 2.0}
+{"ts": "2026-07-21 09:24", "model": "qwen2.5-coder:14b", "task": "constraints", "pass": 4, "of": 5, "tokens": 53, "tok_s": 56.9, "secs": 11.8}
+{"ts": "2026-07-21 09:24", "model": "qwen2.5-coder:14b", "task": "json_discipline", "pass": 4, "of": 5, "tokens": 119, "tok_s": 56.2, "secs": 2.6}
+{"ts": "2026-07-21 09:24", "model": "qwen2.5-coder:14b", "task": "orchestrator", "pass": 3, "of": 6, "tokens": 180, "tok_s": 56.3, "secs": 3.6}
+{"ts": "2026-07-21 09:29", "model": "hermes3:8b", "task": "constraints", "run": 1, "seed": 42, "pass": 4, "of": 5, "tokens": 62, "tok_s": 121.7, "secs": 5.2}
+{"ts": "2026-07-21 09:29", "model": "hermes3:8b", "task": "constraints", "run": 2, "seed": 43, "pass": 3, "of": 5, "tokens": 22, "tok_s": 128.2, "secs": 0.5}
+{"ts": "2026-07-21 09:29", "model": "hermes3:8b", "task": "constraints", "run": 3, "seed": 44, "pass": 3, "of": 5, "tokens": 25, "tok_s": 127.6, "secs": 0.6}

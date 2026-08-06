@@ -1,9 +1,63 @@
-{"ts": "2026-07-21 09:23", "model": "hermes3:8b", "task": "constraints", "pass": 3, "of": 5, "tokens": 22, "tok_s": 100.3, "secs": 9.4}
-{"ts": "2026-07-21 09:23", "model": "hermes3:8b", "task": "json_discipline", "pass": 5, "of": 5, "tokens": 135, "tok_s": 117.4, "secs": 1.7}
-{"ts": "2026-07-21 09:23", "model": "hermes3:8b", "task": "orchestrator", "pass": 4, "of": 6, "tokens": 180, "tok_s": 119.4, "secs": 2.0}
-{"ts": "2026-07-21 09:24", "model": "qwen2.5-coder:14b", "task": "constraints", "pass": 4, "of": 5, "tokens": 53, "tok_s": 56.9, "secs": 11.8}
-{"ts": "2026-07-21 09:24", "model": "qwen2.5-coder:14b", "task": "json_discipline", "pass": 4, "of": 5, "tokens": 119, "tok_s": 56.2, "secs": 2.6}
-{"ts": "2026-07-21 09:24", "model": "qwen2.5-coder:14b", "task": "orchestrator", "pass": 3, "of": 6, "tokens": 180, "tok_s": 56.3, "secs": 3.6}
-{"ts": "2026-07-21 09:29", "model": "hermes3:8b", "task": "constraints", "run": 1, "seed": 42, "pass": 4, "of": 5, "tokens": 62, "tok_s": 121.7, "secs": 5.2}
-{"ts": "2026-07-21 09:29", "model": "hermes3:8b", "task": "constraints", "run": 2, "seed": 43, "pass": 3, "of": 5, "tokens": 22, "tok_s": 128.2, "secs": 0.5}
-{"ts": "2026-07-21 09:29", "model": "hermes3:8b", "task": "constraints", "run": 3, "seed": 44, "pass": 3, "of": 5, "tokens": 25, "tok_s": 127.6, "secs": 0.6}
+{"ts": "2026-08-06 12:30", "model": "hermes3:8b", "task": "constraints", "run": 1, "seed": 42, "pass": 4, "of": 5, "tokens": 62, "tok_s": 105.6, "secs": 4.4}
+{"ts": "2026-08-06 12:30", "model": "hermes3:8b", "task": "constraints", "run": 2, "seed": 43, "pass": 3, "of": 5, "tokens": 22, "tok_s": 127.4, "secs": 0.5}
+{"ts": "2026-08-06 12:30", "model": "hermes3:8b", "task": "constraints", "run": 3, "seed": 44, "pass": 3, "of": 5, "tokens": 25, "tok_s": 109.2, "secs": 0.6}
+{"ts": "2026-08-06 12:30", "model": "hermes3:8b", "task": "json_discipline", "run": 1, "seed": 42, "pass": 5, "of": 5, "tokens": 132, "tok_s": 124.0, "secs": 1.5}
+{"ts": "2026-08-06 12:30", "model": "hermes3:8b", "task": "json_discipline", "run": 2, "seed": 43, "pass": 5, "of": 5, "tokens": 132, "tok_s": 121.9, "secs": 1.4}
+{"ts": "2026-08-06 12:30", "model": "hermes3:8b", "task": "json_discipline", "run": 3, "seed": 44, "pass": 5, "of": 5, "tokens": 132, "tok_s": 124.3, "secs": 1.5}
+{"ts": "2026-08-06 12:30", "model": "hermes3:8b", "task": "orchestrator", "run": 1, "seed": 42, "pass": 2, "of": 6, "tokens": 228, "tok_s": 119.3, "secs": 2.2}
+{"ts": "2026-08-06 12:30", "model": "hermes3:8b", "task": "orchestrator", "run": 2, "seed": 43, "pass": 4, "of": 6, "tokens": 246, "tok_s": 121.1, "secs": 2.4}
+{"ts": "2026-08-06 12:30", "model": "hermes3:8b", "task": "orchestrator", "run": 3, "seed": 44, "pass": 4, "of": 6, "tokens": 244, "tok_s": 121.9, "secs": 2.3}
+{"ts": "2026-08-06 12:31", "model": "qwen2.5-coder:14b", "task": "constraints", "run": 1, "seed": 42, "pass": 4, "of": 5, "tokens": 27, "tok_s": 64.9, "secs": 7.0}
+{"ts": "2026-08-06 12:31", "model": "qwen2.5-coder:14b", "task": "constraints", "run": 2, "seed": 43, "pass": 5, "of": 5, "tokens": 31, "tok_s": 66.3, "secs": 0.7}
+{"ts": "2026-08-06 12:31", "model": "qwen2.5-coder:14b", "task": "constraints", "run": 3, "seed": 44, "pass": 4, "of": 5, "tokens": 31, "tok_s": 67.8, "secs": 0.7}
+{"ts": "2026-08-06 12:31", "model": "qwen2.5-coder:14b", "task": "json_discipline", "run": 1, "seed": 42, "pass": 4, "of": 5, "tokens": 121, "tok_s": 64.5, "secs": 2.2}
+{"ts": "2026-08-06 12:31", "model": "qwen2.5-coder:14b", "task": "json_discipline", "run": 2, "seed": 43, "pass": 4, "of": 5, "tokens": 119, "tok_s": 66.3, "secs": 2.1}
+{"ts": "2026-08-06 12:31", "model": "qwen2.5-coder:14b", "task": "json_discipline", "run": 3, "seed": 44, "pass": 4, "of": 5, "tokens": 119, "tok_s": 65.4, "secs": 2.1}
+{"ts": "2026-08-06 12:31", "model": "qwen2.5-coder:14b", "task": "orchestrator", "run": 1, "seed": 42, "pass": 3, "of": 6, "tokens": 175, "tok_s": 64.4, "secs": 3.0}
+{"ts": "2026-08-06 12:31", "model": "qwen2.5-coder:14b", "task": "orchestrator", "run": 2, "seed": 43, "pass": 3, "of": 6, "tokens": 177, "tok_s": 64.9, "secs": 3.0}
+{"ts": "2026-08-06 12:31", "model": "qwen2.5-coder:14b", "task": "orchestrator", "run": 3, "seed": 44, "pass": 2, "of": 6, "tokens": 156, "tok_s": 65.6, "secs": 2.7}
+{"ts": "2026-08-06 12:31", "model": "qwen2.5:14b", "task": "constraints", "run": 1, "seed": 42, "pass": 5, "of": 5, "tokens": 37, "tok_s": 60.0, "secs": 7.4}
+{"ts": "2026-08-06 12:31", "model": "qwen2.5:14b", "task": "constraints", "run": 2, "seed": 43, "pass": 5, "of": 5, "tokens": 32, "tok_s": 66.8, "secs": 0.7}
+{"ts": "2026-08-06 12:31", "model": "qwen2.5:14b", "task": "constraints", "run": 3, "seed": 44, "pass": 5, "of": 5, "tokens": 37, "tok_s": 65.9, "secs": 0.9}
+{"ts": "2026-08-06 12:31", "model": "qwen2.5:14b", "task": "json_discipline", "run": 1, "seed": 42, "pass": 2, "of": 5, "tokens": 109, "tok_s": 65.1, "secs": 2.0}
+{"ts": "2026-08-06 12:31", "model": "qwen2.5:14b", "task": "json_discipline", "run": 2, "seed": 43, "pass": 2, "of": 5, "tokens": 109, "tok_s": 63.2, "secs": 2.1}
+{"ts": "2026-08-06 12:31", "model": "qwen2.5:14b", "task": "json_discipline", "run": 3, "seed": 44, "pass": 2, "of": 5, "tokens": 109, "tok_s": 65.9, "secs": 2.0}
+{"ts": "2026-08-06 12:31", "model": "qwen2.5:14b", "task": "orchestrator", "run": 1, "seed": 42, "pass": 6, "of": 6, "tokens": 292, "tok_s": 64.7, "secs": 4.9}
+{"ts": "2026-08-06 12:31", "model": "qwen2.5:14b", "task": "orchestrator", "run": 2, "seed": 43, "pass": 3, "of": 6, "tokens": 271, "tok_s": 61.3, "secs": 4.8}
+{"ts": "2026-08-06 12:31", "model": "qwen2.5:14b", "task": "orchestrator", "run": 3, "seed": 44, "pass": 2, "of": 6, "tokens": 278, "tok_s": 57.6, "secs": 5.1}
+{"ts": "2026-08-06 12:32", "model": "phi4:latest", "task": "constraints", "run": 1, "seed": 42, "pass": 4, "of": 5, "tokens": 60, "tok_s": 59.7, "secs": 10.9}
+{"ts": "2026-08-06 12:32", "model": "phi4:latest", "task": "constraints", "run": 2, "seed": 43, "pass": 3, "of": 5, "tokens": 83, "tok_s": 61.6, "secs": 1.6}
+{"ts": "2026-08-06 12:32", "model": "phi4:latest", "task": "constraints", "run": 3, "seed": 44, "pass": 4, "of": 5, "tokens": 55, "tok_s": 65.4, "secs": 1.1}
+{"ts": "2026-08-06 12:32", "model": "phi4:latest", "task": "json_discipline", "run": 1, "seed": 42, "pass": 0, "of": 5, "tokens": 136, "tok_s": 64.7, "secs": 2.3}
+{"ts": "2026-08-06 12:32", "model": "phi4:latest", "task": "json_discipline", "run": 2, "seed": 43, "pass": 0, "of": 5, "tokens": 134, "tok_s": 63.1, "secs": 2.4}
+{"ts": "2026-08-06 12:32", "model": "phi4:latest", "task": "json_discipline", "run": 3, "seed": 44, "pass": 0, "of": 5, "tokens": 134, "tok_s": 64.9, "secs": 2.3}
+{"ts": "2026-08-06 12:32", "model": "phi4:latest", "task": "orchestrator", "run": 1, "seed": 42, "pass": 5, "of": 6, "tokens": 282, "tok_s": 63.5, "secs": 4.7}
+{"ts": "2026-08-06 12:32", "model": "phi4:latest", "task": "orchestrator", "run": 2, "seed": 43, "pass": 6, "of": 6, "tokens": 274, "tok_s": 57.8, "secs": 5.0}
+{"ts": "2026-08-06 12:32", "model": "phi4:latest", "task": "orchestrator", "run": 3, "seed": 44, "pass": 6, "of": 6, "tokens": 272, "tok_s": 57.6, "secs": 5.0}
+{"ts": "2026-08-06 12:32", "model": "deepseek-r1:14b", "task": "constraints", "run": 1, "seed": 42, "pass": 2, "of": 5, "tokens": 512, "tok_s": 57.2, "secs": 15.9}
+{"ts": "2026-08-06 12:32", "model": "deepseek-r1:14b", "task": "constraints", "run": 2, "seed": 43, "pass": 4, "of": 5, "tokens": 305, "tok_s": 56.9, "secs": 5.8}
+{"ts": "2026-08-06 12:32", "model": "deepseek-r1:14b", "task": "constraints", "run": 3, "seed": 44, "pass": 2, "of": 5, "tokens": 512, "tok_s": 56.1, "secs": 9.4}
+{"ts": "2026-08-06 12:33", "model": "deepseek-r1:14b", "task": "json_discipline", "run": 1, "seed": 42, "pass": 4, "of": 5, "tokens": 388, "tok_s": 52.1, "secs": 7.8}
+{"ts": "2026-08-06 12:33", "model": "deepseek-r1:14b", "task": "json_discipline", "run": 2, "seed": 43, "pass": 5, "of": 5, "tokens": 549, "tok_s": 59.6, "secs": 9.5}
+{"ts": "2026-08-06 12:33", "model": "deepseek-r1:14b", "task": "json_discipline", "run": 3, "seed": 44, "pass": 5, "of": 5, "tokens": 489, "tok_s": 59.3, "secs": 8.6}
+{"ts": "2026-08-06 12:35", "model": "deepseek-r1:14b", "task": "orchestrator", "run": 1, "seed": 42, "pass": 0, "of": 6, "tokens": 6776, "tok_s": 58.7, "secs": 115.9}
+{"ts": "2026-08-06 12:37", "model": "deepseek-r1:14b", "task": "orchestrator", "run": 2, "seed": 43, "pass": 0, "of": 6, "tokens": 8190, "tok_s": 57.5, "secs": 143.1}
+{"ts": "2026-08-06 12:39", "model": "deepseek-r1:14b", "task": "orchestrator", "run": 3, "seed": 44, "pass": 6, "of": 6, "tokens": 5230, "tok_s": 62.2, "secs": 84.7}
+{"ts": "2026-08-06 12:39", "model": "mistral-small:latest", "task": "constraints", "run": 1, "seed": 42, "pass": 4, "of": 5, "tokens": 61, "tok_s": 34.6, "secs": 11.5}
+{"ts": "2026-08-06 12:39", "model": "mistral-small:latest", "task": "constraints", "run": 2, "seed": 43, "pass": 4, "of": 5, "tokens": 57, "tok_s": 35.5, "secs": 2.0}
+{"ts": "2026-08-06 12:39", "model": "mistral-small:latest", "task": "constraints", "run": 3, "seed": 44, "pass": 5, "of": 5, "tokens": 66, "tok_s": 35.3, "secs": 2.3}
+{"ts": "2026-08-06 12:39", "model": "mistral-small:latest", "task": "json_discipline", "run": 1, "seed": 42, "pass": 0, "of": 5, "tokens": 120, "tok_s": 35.3, "secs": 3.9}
+{"ts": "2026-08-06 12:39", "model": "mistral-small:latest", "task": "json_discipline", "run": 2, "seed": 43, "pass": 0, "of": 5, "tokens": 142, "tok_s": 35.2, "secs": 4.4}
+{"ts": "2026-08-06 12:39", "model": "mistral-small:latest", "task": "json_discipline", "run": 3, "seed": 44, "pass": 0, "of": 5, "tokens": 120, "tok_s": 35.3, "secs": 3.8}
+{"ts": "2026-08-06 12:39", "model": "mistral-small:latest", "task": "orchestrator", "run": 1, "seed": 42, "pass": 5, "of": 6, "tokens": 236, "tok_s": 35.1, "secs": 7.2}
+{"ts": "2026-08-06 12:39", "model": "mistral-small:latest", "task": "orchestrator", "run": 2, "seed": 43, "pass": 5, "of": 6, "tokens": 234, "tok_s": 35.0, "secs": 7.1}
+{"ts": "2026-08-06 12:39", "model": "mistral-small:latest", "task": "orchestrator", "run": 3, "seed": 44, "pass": 5, "of": 6, "tokens": 250, "tok_s": 35.0, "secs": 7.5}
+{"ts": "2026-08-06 12:40", "model": "llama3.1:latest", "task": "constraints", "run": 1, "seed": 42, "pass": 4, "of": 5, "tokens": 38, "tok_s": 115.7, "secs": 4.8}
+{"ts": "2026-08-06 12:40", "model": "llama3.1:latest", "task": "constraints", "run": 2, "seed": 43, "pass": 4, "of": 5, "tokens": 40, "tok_s": 119.8, "secs": 0.6}
+{"ts": "2026-08-06 12:40", "model": "llama3.1:latest", "task": "constraints", "run": 3, "seed": 44, "pass": 5, "of": 5, "tokens": 32, "tok_s": 120.5, "secs": 0.6}
+{"ts": "2026-08-06 12:40", "model": "llama3.1:latest", "task": "json_discipline", "run": 1, "seed": 42, "pass": 3, "of": 5, "tokens": 111, "tok_s": 118.6, "secs": 1.3}
+{"ts": "2026-08-06 12:40", "model": "llama3.1:latest", "task": "json_discipline", "run": 2, "seed": 43, "pass": 3, "of": 5, "tokens": 93, "tok_s": 119.0, "secs": 1.1}
+{"ts": "2026-08-06 12:40", "model": "llama3.1:latest", "task": "json_discipline", "run": 3, "seed": 44, "pass": 3, "of": 5, "tokens": 93, "tok_s": 119.1, "secs": 1.1}
+{"ts": "2026-08-06 12:40", "model": "llama3.1:latest", "task": "orchestrator", "run": 1, "seed": 42, "pass": 6, "of": 6, "tokens": 302, "tok_s": 117.0, "secs": 3.0}
+{"ts": "2026-08-06 12:40", "model": "llama3.1:latest", "task": "orchestrator", "run": 2, "seed": 43, "pass": 4, "of": 6, "tokens": 396, "tok_s": 116.5, "secs": 3.9}
+{"ts": "2026-08-06 12:40", "model": "llama3.1:latest", "task": "orchestrator", "run": 3, "seed": 44, "pass": 5, "of": 6, "tokens": 324, "tok_s": 116.9, "secs": 3.2}
