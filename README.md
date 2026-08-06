@@ -7,6 +7,28 @@ Born from a real finding: the same 14B model scored 5/5 on a coding task, then
 3/6 on the identical task an hour later. Single runs are noise. This harness
 makes local-LLM evaluation seeded, repeatable, and machine-graded.
 
+## Current standings
+
+7 models · 3 task suites · 3 seeded runs each · 63 scored generations.
+Served by Ollama on an RTX 4080.
+
+| Model | Score | Avg tok/s |
+|---|---|---|
+| llama3.1:latest | 37/48 (77.1%) | 118.1 |
+| hermes3:8b | 35/48 (72.9%) | 119.4 |
+| qwen2.5-coder:14b | 33/48 (68.8%) | 65.6 |
+| qwen2.5:14b | 32/48 (66.7%) | 63.4 |
+| phi4:latest | 28/48 (58.3%) | 62.0 |
+| deepseek-r1:14b | 28/48 (58.3%) | 57.7 |
+| mistral-small:latest | 28/48 (58.3%) | 35.1 |
+
+Both 8B models beat every 14B model on these tasks, at roughly twice the
+throughput. Parameter count is not the story; instruction adherence is.
+
+`deepseek-r1:14b` is the cautionary tale — it burned ~8 minutes per
+`orchestrator` run generating reasoning tokens, versus seconds for everything
+else, and still landed mid-table.
+
 ## Use
 
     python3 gauntlet.py hermes3:8b              # run all tasks
@@ -42,8 +64,19 @@ optional gitignored `local_config.json`:
 ## Add a task
 
 Drop a `tasks/<name>.py` defining `PROMPT` (str), optional `OPTIONS` (dict of
-Ollama options), and `grade(resp, extract_code) -> [(test_name, bool, detail)]`.
-It is picked up automatically.
+Ollama options), `CHECKS` (list of every check name the grader can score), and
+`grade(resp, extract_code) -> [(test_name, bool, detail)]`. It is picked up
+automatically.
+
+`CHECKS` is not optional bookkeeping. Graders naturally bail out early when a
+response is too malformed to keep testing — unparseable JSON, code that won't
+execute. Left alone, that shrinks the denominator and *rewards* the worst
+failures: 0/2 dents a score less than 0/5. The harness pads every result up to
+`CHECKS`, marking unreached checks failed, so a broken response is always
+measured against the full bar.
+
+This was a real bug here, not a hypothetical. It sat in the graders for weeks
+and quietly inflated three models before an audit caught it.
 
 ## History
 
