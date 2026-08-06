@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Model Gauntlet — Local LLM Leaderboard</title>
+<meta name="description" content="Seeded, machine-graded benchmark of local Ollama models on an RTX 4080. Reproducible scores for instruction adherence, JSON discipline, and code generation.">
+<meta property="og:title" content="Model Gauntlet — Local LLM Leaderboard">
+<meta property="og:description" content="Which local model should you actually run? Seeded, reproducible, machine-graded scores on an RTX 4080.">
+<meta property="og:type" content="website">
+<style>
+:root{
+  --bg:#0e1116; --panel:#161b22; --line:#232b36; --fg:#e6edf3;
+  --dim:#8b949e; --accent:#4ade80; --warn:#fbbf24; --bad:#f87171;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font:16px/1.6 ui-sans-serif,-apple-system,"Segoe UI",Inter,sans-serif;
+  padding:2.5rem 1.25rem 4rem}
+.wrap{max-width:860px;margin:0 auto}
+h1{font-size:1.9rem;margin:0 0 .35rem;letter-spacing:-.02em}
+.sub{color:var(--dim);margin:0 0 1.75rem}
+.meta{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
+.chip{background:var(--panel);border:1px solid var(--line);border-radius:999px;
+  padding:.25rem .7rem;font-size:.8rem;color:var(--dim)}
+h2{font-size:1.05rem;margin:2.5rem 0 .75rem;letter-spacing:.01em}
+table{width:100%;border-collapse:collapse;background:var(--panel);
+  border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:.92rem}
+th,td{padding:.6rem .75rem;text-align:left;border-bottom:1px solid var(--line)}
+th{background:#1b222c;font-weight:600;font-size:.78rem;text-transform:uppercase;
+  letter-spacing:.05em;color:var(--dim);cursor:pointer;user-select:none;white-space:nowrap}
+th:hover{color:var(--fg)}
+tr:last-child td{border-bottom:none}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+.model{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88rem}
+.bar{height:5px;border-radius:3px;background:#243040;margin-top:.3rem;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--accent)}
+.rank{color:var(--dim);width:2rem}
+.good{color:var(--accent)} .mid{color:var(--warn)} .low{color:var(--bad)}
+p.note{color:var(--dim);font-size:.9rem}
+code{background:var(--panel);border:1px solid var(--line);border-radius:4px;
+  padding:.1rem .35rem;font-size:.85em}
+a{color:var(--accent)}
+footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--line);
+  color:var(--dim);font-size:.85rem}
+#status{color:var(--dim);padding:1rem 0}
+@media(max-width:560px){body{padding:1.5rem .9rem 3rem}h1{font-size:1.5rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Model Gauntlet</h1>
+<p class="sub">Which local model should you actually run? Seeded, machine-graded, reproducible.</p>
+
+<div class="meta" id="meta"></div>
+
+<p class="note">
+Every task pins a base seed, and <code>--runs N</code> walks seeds 42, 43, 44&hellip;
+so any score here can be reproduced exactly. Scores are best-of-N per task &mdash;
+the honest number, not the lucky one.
+</p>
+
+<h2>Leaderboard</h2>
+<div id="status">Loading results&hellip;</div>
+<table id="board" hidden>
+  <thead><tr>
+    <th class="rank">#</th>
+    <th data-k="model">Model</th>
+    <th data-k="pct" class="num">Score</th>
+    <th data-k="tps" class="num">Avg tok/s</th>
+    <th data-k="runs" class="num">Runs</th>
+  </tr></thead>
+  <tbody></tbody>
+</table>
+
+<h2>By task</h2>
+<table id="matrix" hidden>
+  <thead><tr><th>Model</th></tr></thead>
+  <tbody></tbody>
+</table>
+
+<h2>What the tasks measure</h2>
+<p class="note">
+<strong>constraints</strong> &mdash; exact bullet counts, exact word counts, forbidden
+words. Trivial to state, brutal to obey.<br>
+<strong>json_discipline</strong> &mdash; strict schema output, no fences, no prose.
+Fitness test for bot and tool-call duty.<br>
+<strong>orchestrator</strong> &mdash; the model writes a <code>plan()</code> function
+and it is graded by <em>executing it</em> against hidden tests, including a
+cycle-detection case and an alphabetical tiebreak.
+</p>
+
+<h2>A note on the scoring</h2>
+<p class="note">
+An earlier version of these graders stopped early when a response was too
+malformed to keep testing &mdash; unparseable JSON, code that wouldn't execute. That
+shrank the denominator and quietly <em>rewarded</em> the worst failures: 0/2
+costs less than 0/5. Three models were flattered by it before an audit caught
+it. Every result now pads to the full check count, so a broken response is
+always measured against the full bar.
+</p>
+
+<footer>
+Source, methodology, and raw results:
+<a href="https://github.com/eusoro-stack/model-gauntlet">github.com/eusoro-stack/model-gauntlet</a><br>
+Served by Ollama on an RTX 4080. Updates whenever new results are pushed.
+</footer>
+
+</div>
+<script>
+const FULL = {constraints:5, json_discipline:5, orchestrator:6};
+const SRC = "https://raw.githubusercontent.com/eusoro-stack/model-gauntlet/main/results.jsonl";
+let rows = [], agg = [], sortKey = "pct", sortDir = -1;
+
+function cls(p){ return p >= 72 ? "good" : p >= 62 ? "mid" : "low"; }
+
+function build(){
+  const by = {};
+  for (const r of rows){
+    const a = by[r.model] || (by[r.model] = {model:r.model, pass:0, of:0, tps:[], runs:0, tasks:{}});
+    const full = FULL[r.task] || r.of;
+    a.pass += r.pass; a.of += full; a.tps.push(r.tok_s); a.runs++;
+    const t = a.tasks[r.task] || (a.tasks[r.task] = {best:0, of:full});
+    if (r.pass > t.best) t.best = r.pass;
+  }
+  agg = Object.keys(by).map(function(k){
+    var a = by[k];
+    return Object.assign({}, a, {
+      pct: 100*a.pass/a.of,
+      tps: a.tps.reduce(function(x,y){return x+y;},0)/a.tps.length
+    });
+  });
+}
+
+function renderBoard(){
+  agg.sort(function(x,y){
+    var a = x[sortKey], b = y[sortKey];
+    return (typeof a === "string" ? a.localeCompare(b) : a-b) * sortDir;
+  });
+  document.querySelector("#board tbody").innerHTML = agg.map(function(a,i){
+    return '<tr><td class="rank">' + (i+1) + '</td>' +
+      '<td class="model">' + a.model + '</td>' +
+      '<td class="num"><span class="' + cls(a.pct) + '">' + a.pass + '/' + a.of + '</span>' +
+      '<div class="bar"><i style="width:' + a.pct.toFixed(1) + '%"></i></div></td>' +
+      '<td class="num">' + a.tps.toFixed(1) + '</td>' +
+      '<td class="num">' + a.runs + '</td></tr>';
+  }).join("");
+  document.getElementById("board").hidden = false;
+}
+
+function renderMatrix(){
+  var tasks = Object.keys(rows.reduce(function(m,r){ m[r.task]=1; return m; },{})).sort();
+  document.querySelector("#matrix thead tr").innerHTML =
+    "<th>Model</th>" + tasks.map(function(t){ return '<th class="num">' + t + '</th>'; }).join("");
+  document.querySelector("#matrix tbody").innerHTML = agg.map(function(a){
+    return '<tr><td class="model">' + a.model + '</td>' + tasks.map(function(t){
+      var c = a.tasks[t];
+      if (!c) return '<td class="num">&mdash;</td>';
+      var p = 100*c.best/c.of;
+      return '<td class="num"><span class="' + cls(p) + '">' + c.best + '/' + c.of + '</span></td>';
+    }).join("") + '</tr>';
+  }).join("");
+  document.getElementById("matrix").hidden = false;
+}
+
+function renderMeta(){
+  var models = Object.keys(rows.reduce(function(m,r){ m[r.model]=1; return m; },{})).length;
+  var tasks  = Object.keys(rows.reduce(function(m,r){ m[r.task]=1;  return m; },{})).length;
+  var last = rows.map(function(r){ return r.ts; }).sort().pop() || "";
+  document.getElementById("meta").innerHTML = [
+    models + " models", tasks + " task suites", rows.length + " scored generations",
+    "RTX 4080 &middot; Ollama", last ? "last run " + last.slice(0,10) : ""
+  ].filter(Boolean).map(function(t){ return '<span class="chip">' + t + '</span>'; }).join("");
+}
+
+fetch(SRC, {cache:"no-store"})
+  .then(function(r){ if(!r.ok) throw new Error(r.status); return r.text(); })
+  .then(function(txt){
+    rows = txt.trim().split("\n").filter(Boolean).map(function(l){ return JSON.parse(l); });
+    if (!rows.length) throw new Error("no rows");
+    build(); renderMeta(); renderBoard(); renderMatrix();
+    document.getElementById("status").hidden = true;
+    document.querySelectorAll("#board th[data-k]").forEach(function(th){
+      th.onclick = function(){
+        var k = th.dataset.k;
+        sortDir = (k === sortKey) ? -sortDir : -1;
+        sortKey = k; renderBoard();
+      };
+    });
+  })
+  .catch(function(e){
+    document.getElementById("status").textContent =
+      "Could not load results.jsonl (" + e.message + "). See the repository for raw data.";
+  });
+</script>
+</body>
+</html>
