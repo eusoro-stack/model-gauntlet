@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(python3 gauntlet.py --help)",
+      "Bash(python gauntlet.py --help)",
+      "Bash(python3 gauntlet.py --board)",
+      "Bash(python gauntlet.py --board)"
+    ],
+    "deny": [
+      "Bash(git push --force:*)"
+    ]
+  }
+}
