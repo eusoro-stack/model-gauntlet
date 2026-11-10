@@ -60,6 +60,11 @@ optional gitignored `local_config.json`:
   Fitness test for bot and tool-call duty.
 - `constraints` — exact bullet counts, word counts, forbidden words.
   Trivial to state, brutal to obey; 8B models fail one constraint half the time.
+- `policy_grounding` — a support bot answers 3 customer questions from a store
+  policy, as JSON, each backed by a **word-for-word quote** checked against the
+  policy text. Distractor numbers (sale vs. full-price returns, US vs. Canada
+  shipping) catch skimming; the third question isn't covered, and the only
+  passing answer is `NOT IN POLICY`. Fitness test for grounded extraction.
 
 ## Add a task
 
@@ -67,6 +72,12 @@ Drop a `tasks/<name>.py` defining `PROMPT` (str), optional `OPTIONS` (dict of
 Ollama options), `CHECKS` (list of every check name the grader can score), and
 `grade(resp, extract_code) -> [(test_name, bool, detail)]`. It is picked up
 automatically.
+
+Graders get unit tests in `tests/`, run with no network or Ollama:
+
+    python3 -m unittest discover -s tests -v
+
+Fix a grader before its first real run: once results exist, the task is frozen.
 
 `CHECKS` is not optional bookkeeping. Graders naturally bail out early when a
 response is too malformed to keep testing — unparseable JSON, code that won't

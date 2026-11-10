@@ -88,7 +88,11 @@ words. Trivial to state, brutal to obey.<br>
 Fitness test for bot and tool-call duty.<br>
 <strong>orchestrator</strong> &mdash; the model writes a <code>plan()</code> function
 and it is graded by <em>executing it</em> against hidden tests, including a
-cycle-detection case and an alphabetical tiebreak.
+cycle-detection case and an alphabetical tiebreak.<br>
+<strong>policy_grounding</strong> &mdash; answer customer questions from a store
+policy, each backed by a word-for-word quote that is checked against the text.
+Distractor numbers catch skimming, and one question isn't covered: the only
+passing answer is <code>NOT IN POLICY</code>.
 </p>
 
 <h2>A note on the scoring</h2>
@@ -109,7 +113,7 @@ Served by Ollama on an RTX 4080. Updates whenever new results are pushed.
 
 </div>
 <script>
-const FULL = {constraints:5, json_discipline:5, orchestrator:6};
+const FULL = {constraints:5, json_discipline:5, orchestrator:6, policy_grounding:8};
 const SRC = "https://raw.githubusercontent.com/eusoro-stack/model-gauntlet/main/results.jsonl";
 let rows = [], agg = [], sortKey = "pct", sortDir = -1;
 

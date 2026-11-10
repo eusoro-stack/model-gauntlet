@@ -15,6 +15,7 @@ python3 gauntlet.py --board                      # leaderboard from results.json
 python3 gauntlet.py hermes3:8b                   # run all tasks against one model
 python3 gauntlet.py hermes3:8b --runs 3          # best-of-3 per task (recommended, honest number)
 python3 gauntlet.py qwen2.5-coder:14b orchestrator   # run a single task
+python3 -m unittest discover -s tests -v         # grader unit tests (no network)
 ```
 - Running a model needs a reachable Ollama. Default is `http://localhost:11434`;
   override with env `GAUNTLET_HOST` or a gitignored `local_config.json`.
@@ -32,6 +33,8 @@ tasks/                   # one file per task; auto-discovered by filename
   orchestrator.py        #   model writes plan(); graded by executing it against hidden tests
   json_discipline.py     #   strict JSON output, no fences, no prose
   constraints.py         #   exact bullet/word counts, forbidden words
+  policy_grounding.py    #   answer from a store policy with verbatim quotes; "NOT IN POLICY" trap
+tests/                   # stdlib unittest for graders; feed canned responses, no Ollama needed
 results.jsonl            # append-only score history (the data behind README + docs page)
 results-legacy.jsonl     # pre-seed-era results, kept for reference; not read by anything
 docs/index.html          # public leaderboard page
